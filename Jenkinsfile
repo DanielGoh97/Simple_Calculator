@@ -9,10 +9,17 @@ pipeline {
       } 
     }
     stage('Install Dependencies') {
-      steps {
-        sh 'python3 -m pip install -r requirements.txt'
-      }
-    }
+  steps {
+    echo 'Checking Python version...'
+    sh 'python3 --version'
+    echo 'Checking pip version...'
+    sh 'pip3 --version'
+    
+    echo 'Installing dependencies...'
+    sh 'python3 -m pip install --no-cache-dir -r requirements.txt --user -vvv'
+  }
+}
+
     stage('Build') {
       steps {
         echo 'Running calculator script...'
